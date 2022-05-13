@@ -1,11 +1,11 @@
 import java.util.ArrayList;
 import java.util.concurrent.Callable;
 
-public class SubsetSumTask implements Callable<Boolean> {
+public class SubsetSumExhaustiveTask implements Callable<Boolean> {
     private ArrayList<Integer> list;
     private int target;
 
-    SubsetSumTask(ArrayList<Integer> list, int target) {
+    SubsetSumExhaustiveTask(ArrayList<Integer> list, int target) {
       this.list = list;
       this.target = target;
     }
