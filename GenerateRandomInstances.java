@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-class RandomSetGenerator {
+class GenerateRandomInstances {
   public static void main(String[] args) {
     for (int i = 5; i <= 50; i += 5) { // number of elements in list (5-50)
       System.out.println(randomSetGenerator(i) + "\n");

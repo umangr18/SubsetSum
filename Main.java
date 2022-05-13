@@ -1,3 +1,9 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.FutureTask;
+import java.util.concurrent.TimeUnit;
+
 class Main {
   
   public static void main(String[] args) {
@@ -8,13 +14,13 @@ class Main {
     // one minute
     for (Map.Entry<ArrayList<Integer>, Integer> instance : instances.entrySet()) {
       Exhaustive e = new Exhaustive(instance.getKey(), instance.getValue());
-      FutureTask task = new FutureTask(e);
+      FutureTask<Boolean> task = new FutureTask<Boolean>(e);
       try {
-        boolean result = task.get(1, TimeOut.MINUTES);
-        oneMinuteResults.add(Boolean.toString(result);
-      } catch (TimeOutException e) {
+        boolean result = task.get(1, TimeUnit.MINUTES);
+        oneMinuteResults.add(Boolean.toString(result));
+      } catch (Exception ex) {
         task.cancel(true);
-        System.out.println(e.getMessage());
+        System.out.println(ex.getMessage());
         oneMinuteResults.add("FAIL");
       }
     }
@@ -22,16 +28,19 @@ class Main {
     // ten minutes
     for (Map.Entry<ArrayList<Integer>, Integer> instance : instances.entrySet()) {
       Exhaustive e = new Exhaustive(instance.getKey(), instance.getValue());
-      FutureTask task = new FutureTask(e);
+      FutureTask<Boolean> task = new FutureTask<Boolean>(e);
       try {
-        boolean result = task.get(10, TimeOut.MINUTES);
-        tenMinuteResults.add(Boolean.toString(result);
-      } catch (TimeOutException e) {
+        boolean result = task.get(10, TimeUnit.MINUTES);
+        tenMinuteResults.add(Boolean.toString(result));
+      } catch (Exception ex) {
         task.cancel(true);
-        System.out.println(e.getMessage());
+        System.out.println(ex.getMessage());
         tenMinuteResults.add("FAIL");
       }
     }
+
+    System.out.println("1 Minute Results: " + oneMinuteResults);
+    System.out.println("10 Minute Results: " + tenMinuteResults);
   }
   
 }
