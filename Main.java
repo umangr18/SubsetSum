@@ -1,60 +1,47 @@
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.FutureTask;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 class Main {
-  
   public static void main(String[] args) {
-    ArrayList<Pair> instances = Parse.parse("BaseCases.txt");
-    ArrayList<String> oneMinuteResults = new ArrayList<>();
-    ArrayList<String> tenMinuteResults = new ArrayList<>();
+    ArrayList<Pair> baseCases = Parse.parse("BaseCases.txt");
+    ArrayList<Pair> randomlyGenerated = Parse.parse("RandomlyGenerated.txt");
+    ArrayList<Pair> onlineResources = Parse.parse("OnlineResources.txt");
+    ArrayList<Pair> curatedHard = Parse.parse("CuratedHard.txt");
 
-    // one minute
+    // one minute results
+    System.out.println("ONE MINUTE RESULTS");
+    System.out.println("Base Cases:\n" + runInstances(baseCases, 1) + "\n");
+    System.out.println("Randomly Generated:\n" + runInstances(randomlyGenerated, 1) + "\n");
+    System.out.println("Online Resources:\n" + runInstances(onlineResources, 1) + "\n");
+    System.out.println("Curated Hard:\n" + runInstances(curatedHard, 1) + "\n");
+
+    // ten minute results
+    System.out.println("TEN MINUTE RESULTS");
+    System.out.println("Base Cases:\n" + runInstances(baseCases, 10) + "\n");
+    System.out.println("Randomly Generated:\n" + runInstances(randomlyGenerated, 10) + "\n");
+    System.out.println("Online Resources:\n" + runInstances(onlineResources, 10) + "\n");
+    System.out.println("Curated Hard:\n" + runInstances(curatedHard, 10) + "\n");
+  }
+
+  private static ArrayList<String> runInstances(ArrayList<Pair> instances, int timeout) {
+    ArrayList<String> results = new ArrayList<>();
     for (Pair instance : instances) {
       Exhaustive e = new Exhaustive(instance.getList(), instance.getTarget());
-
-      long start = System.currentTimeMillis();
-      long end = start + 5 * 1000;
-      boolean result = false;
-      while (System.currentTimeMillis() < end) {
-        result = e.subsetSumExhaustive();
-      }
-      System.out.println(result);
-      oneMinuteResults.add(Boolean.toString(result));
-
-      //FutureTask<Boolean> task = new FutureTask<Boolean>(e);
-      /*try {
-        //boolean result = task.get(1, TimeUnit.MINUTES);
-        boolean result = task.get(20, TimeUnit.SECONDS);
-        oneMinuteResults.add(Boolean.toString(result));
-      } catch (Exception ex) {
-        task.cancel(true);
-        System.out.println(ex.getMessage());
-        oneMinuteResults.add("FAIL");
-      }*/
-    }
-
-    System.out.println("1 Minute Results: " + oneMinuteResults);
-    
-    // ten minutes
-    /*for (Map.Entry<ArrayList<Integer>, Integer> instance : instances.entrySet()) {
-      Exhaustive e = new Exhaustive(instance.getKey(), instance.getValue());
-      FutureTask<Boolean> task = new FutureTask<Boolean>(e);
+      ExecutorService service = Executors.newSingleThreadExecutor();
       try {
-        boolean result = task.get(10, TimeUnit.MINUTES);
-        tenMinuteResults.add(Boolean.toString(result));
+        Future<Boolean> f = service.submit(e::subsetSumExhaustive);
+        boolean result = f.get(timeout, TimeUnit.MINUTES);
+        results.add(Boolean.toString(result));
+      } catch (TimeoutException ex) {
+        results.add("FAIL");
       } catch (Exception ex) {
-        task.cancel(true);
         System.out.println(ex.getMessage());
-        tenMinuteResults.add("FAIL");
       }
-    }*/
-
-    //System.out.println("10 Minute Results: " + tenMinuteResults);
+    }
+    return results;
   }
-  
 }
