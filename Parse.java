@@ -12,13 +12,13 @@ class Parse {
     return new ArrayList<Integer>(stringList.stream().map(function).collect(Collectors.toList()));
   }
 
-  public static HashMap<ArrayList<Integer>, Integer> parse(String filename) {
-    HashMap<ArrayList<Integer>, Integer> map = new HashMap<>();
+  public static ArrayList<Pair> parse(String filename) {
+    ArrayList<Pair> instances = new ArrayList<>();
     String line = "";
     try {
-      BufferedReader br = new BufferedReader(new FileReader("Instances.txt"));
+      BufferedReader br = new BufferedReader(new FileReader(filename));
       while ((line = br.readLine()) != null) {
-        //System.out.println(line);
+        System.out.println(line);
         // ignore all lines that start with '#' - they're comments
         if (line.contains("#")) {
           continue;
@@ -26,20 +26,20 @@ class Parse {
         String[] tokens = line.split(":");
         int target = Integer.parseInt(tokens[1]);
         if (tokens[0].equals("[]")) {
-          map.put(new ArrayList<Integer>(), target);
+          instances.add(new Pair(new ArrayList<Integer>(), target));
         } else {
           String list = tokens[0].substring(1, tokens[0].length() - 1);
           String[] nums = list.split(", ");
           ArrayList<String> stringList = new ArrayList<>(Arrays.asList(nums));
           ArrayList<Integer> numList = helper(stringList, Integer::parseInt);
-          map.put(numList, target);
+          instances.add(new Pair(numList, target));
         }
       }
       br.close();
     } catch (Exception e) {
       System.out.println(e.getMessage());
     }
-    return map;
+    return instances;
   }
   
 }

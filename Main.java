@@ -9,29 +9,31 @@ import java.util.concurrent.TimeoutException;
 class Main {
   
   public static void main(String[] args) {
-    HashMap<ArrayList<Integer>, Integer> instances = Parse.parse("BaseCases.txt");
+    ArrayList<Pair> instances = Parse.parse("BaseCases.txt");
     ArrayList<String> oneMinuteResults = new ArrayList<>();
     ArrayList<String> tenMinuteResults = new ArrayList<>();
-    
+
     // one minute
-    for (Map.Entry<ArrayList<Integer>, Integer> instance : instances.entrySet()) {
-      Exhaustive e = new Exhaustive(instance.getKey(), instance.getValue());
+    for (Pair instance : instances) {
+      Exhaustive e = new Exhaustive(instance.getList(), instance.getTarget());
+
+      long start = System.currentTimeMillis();
+      long end = start + 5 * 1000;
+      boolean result = false;
+      while (System.currentTimeMillis() < end) {
+        result = e.subsetSumExhaustive();
+      }
+      System.out.println(result);
+      oneMinuteResults.add(Boolean.toString(result));
+
       //FutureTask<Boolean> task = new FutureTask<Boolean>(e);
       /*try {
         //boolean result = task.get(1, TimeUnit.MINUTES);
         boolean result = task.get(20, TimeUnit.SECONDS);
         oneMinuteResults.add(Boolean.toString(result));
-      } catch (ExecutionException e1) {
+      } catch (Exception ex) {
         task.cancel(true);
-        System.out.println("1");
-        oneMinuteResults.add("FAIL");
-      } catch (TimeoutException e2) {
-        task.cancel(true);
-        System.out.println("2");
-        oneMinuteResults.add("FAIL");
-      } catch (InterruptedException e3) {
-        task.cancel(true);
-        System.out.println("3");
+        System.out.println(ex.getMessage());
         oneMinuteResults.add("FAIL");
       }*/
     }
@@ -39,7 +41,7 @@ class Main {
     System.out.println("1 Minute Results: " + oneMinuteResults);
     
     // ten minutes
-    for (Map.Entry<ArrayList<Integer>, Integer> instance : instances.entrySet()) {
+    /*for (Map.Entry<ArrayList<Integer>, Integer> instance : instances.entrySet()) {
       Exhaustive e = new Exhaustive(instance.getKey(), instance.getValue());
       FutureTask<Boolean> task = new FutureTask<Boolean>(e);
       try {
@@ -50,9 +52,9 @@ class Main {
         System.out.println(ex.getMessage());
         tenMinuteResults.add("FAIL");
       }
-    }
+    }*/
 
-    System.out.println("10 Minute Results: " + tenMinuteResults);
+    //System.out.println("10 Minute Results: " + tenMinuteResults);
   }
   
 }
