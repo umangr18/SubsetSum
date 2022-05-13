@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 
-class Main {
+class Exhaustive {
   // combination of recursive and bitwise algorithms
   private static boolean helper(ArrayList<Integer> list, int index, int target) {
     if (target == 0) {
