@@ -2,8 +2,8 @@ import java.util.ArrayList;
 import java.util.concurrent.Callable;
 
 public class Exhaustive implements Callable<Boolean> {
-    private ArrayList<Integer> list;
-    private int target;
+    private final ArrayList<Integer> list;
+    private final int target;
 
     Exhaustive(ArrayList<Integer> list, int target) {
       this.list = list;
@@ -11,12 +11,11 @@ public class Exhaustive implements Callable<Boolean> {
     }
 
     @Override
-    public Boolean call() throws Exception {
-      return subsetSumExhaustive(this.list, this.target);
+    public Boolean call() {
+      return subsetSumExhaustive();
     }
 
-    // combination of recursive and bitwise algorithms
-    private static boolean helper(ArrayList<Integer> list, int index, int target) {
+    private boolean helper(ArrayList<Integer> list, int index, int target) {
       if (target == 0) {
         return true;
       }
@@ -29,13 +28,13 @@ public class Exhaustive implements Callable<Boolean> {
       boolean b = helper(list, index + 1, target);
       return a | b;
     }
-    private static boolean subsetSumExhaustive(ArrayList<Integer> list, int target) {
-      if (list.size() == 0) {
+    public boolean subsetSumExhaustive() {
+      if (this.list.size() == 0) {
         return false;
-      } else if (list.size() == 1) {
-        return list.get(0) == target;
+      } else if (this.list.size() == 1) {
+        return this.list.get(0) == this.target;
       } else {
-        return helper(list, 0, target);
+        return helper(this.list, 0, this.target);
       }
     }
 }

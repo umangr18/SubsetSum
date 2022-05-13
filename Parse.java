@@ -18,18 +18,22 @@ class Parse {
     try {
       BufferedReader br = new BufferedReader(new FileReader("Instances.txt"));
       while ((line = br.readLine()) != null) {
-        System.out.println(line);
+        //System.out.println(line);
         // ignore all lines that start with '#' - they're comments
         if (line.contains("#")) {
           continue;
         }
         String[] tokens = line.split(":");
         int target = Integer.parseInt(tokens[1]);
-        String list = tokens[0].substring(1, tokens[0].length() - 1);
-        String[] nums = list.split(", ");
-        ArrayList<String> stringList = new ArrayList<>(Arrays.asList(nums));
-        ArrayList<Integer> numList = helper(stringList, Integer::parseInt);
-        map.put(numList, target);
+        if (tokens[0].equals("[]")) {
+          map.put(new ArrayList<Integer>(), target);
+        } else {
+          String list = tokens[0].substring(1, tokens[0].length() - 1);
+          String[] nums = list.split(", ");
+          ArrayList<String> stringList = new ArrayList<>(Arrays.asList(nums));
+          ArrayList<Integer> numList = helper(stringList, Integer::parseInt);
+          map.put(numList, target);
+        }
       }
       br.close();
     } catch (Exception e) {
