@@ -1,0 +1,26 @@
+ONE MINUTE RESULTS
+Base Cases:
+[false, false, true, false, false, true, false, true, true, true, true, false, true, true, true, true, true, true, true, false, false, true, true, true, false]
+
+Randomly Generated:
+[true, true, false, false, false, true, true, true, false, false, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, FAIL, FAIL, FAIL, FAIL, FAIL, FAIL, FAIL, FAIL, FAIL, FAIL, FAIL, FAIL, FAIL, FAIL, FAIL, FAIL, FAIL, FAIL, FAIL, FAIL]
+
+Online Resources:
+[true, true, true, true, true, true, true, true, true]
+
+Curated Hard:
+[FAIL, FAIL, FAIL, FAIL, FAIL, FAIL, FAIL, FAIL, FAIL, FAIL, FAIL, FAIL, FAIL, FAIL, FAIL, FAIL]
+
+
+TEN MINUTE RESULTS
+Base Cases:
+[false, false, true, false, false, true, false, true, true, true, true, false, true, true, true, true, true, true, true, false, false, true, true, true, false]
+
+Randomly Generated:
+[true, true, false, false, false, true, true, true, false, false, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, FAIL, FAIL, FAIL, FAIL, FAIL, FAIL, FAIL, FAIL, FAIL, FAIL, FAIL, FAIL, FAIL, FAIL, FAIL]
+
+Online Resources:
+[true, true, true, true, true, true, true, true, true]
+
+Curated Hard:
+[FAIL, FAIL, FAIL, FAIL, FAIL, FAIL, FAIL, FAIL, FAIL, FAIL, FAIL, FAIL, FAIL, FAIL, FAIL, FAIL]
