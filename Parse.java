@@ -4,7 +4,6 @@ import java.util.stream.*;
 import java.util.function.*;
 import java.util.Arrays;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 class Parse {
 
@@ -18,7 +17,7 @@ class Parse {
     try {
       BufferedReader br = new BufferedReader(new FileReader(filename));
       while ((line = br.readLine()) != null) {
-        System.out.println(line);
+        //System.out.println(line);
         // ignore all lines that start with '#' - they're comments
         if (line.contains("#")) {
           continue;
