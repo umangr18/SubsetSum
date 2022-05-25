@@ -31,6 +31,9 @@ public class Greedy implements Callable<Boolean> {
         if (i < this.target - totalSum(subset)) { // if smaller than target - current total sum ...
           subset.add(i); // ... add to the subset
         }
+        if (totalSum(subset) == target) {
+          return true;
+        }
       }
       return totalSum(subset) == this.target; // return true if subset elements sum up to target value
     }
