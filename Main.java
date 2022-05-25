@@ -16,27 +16,27 @@ class Main {
     ArrayList<Pair> onlineResources = Parse.parse("instances/OnlineResources.txt");
     ArrayList<Pair> curatedHard = Parse.parse("instances/CuratedHard.txt");
 
-
+    System.out.println(runInstances(baseCases, 1));
+    /*
     try {
       PrintWriter writer = new PrintWriter("ExhaustiveResults.txt", StandardCharsets.UTF_8);
       writer.println("ONE MINUTE RESULTS");
-
       writer.println(runInstances(baseCases, 1) + "\n");
       writer.println(runInstances(randomlyGenerated, 1) + "\n");
       writer.println(runInstances(onlineResources, 1) + "\n");
       writer.println(runInstances(curatedHard, 1) + "\n");
 
-      writer.println("TEN MINUTE RESULTS");
-      writer.println(runInstances(baseCases, 10) + "\n");
-      writer.println(runInstances(randomlyGenerated, 10) + "\n");
-      writer.println(runInstances(onlineResources, 10) + "\n");
-      writer.println(runInstances(curatedHard, 10) + "\n");
+      //writer.println("TEN MINUTE RESULTS");
+      //writer.println(runInstances(baseCases, 10) + "\n");
+      //writer.println(runInstances(randomlyGenerated, 10) + "\n");
+      //writer.println(runInstances(onlineResources, 10) + "\n");
+      //writer.println(runInstances(curatedHard, 10) + "\n");
 
       writer.close();
     } catch (IOException e) {
       System.out.println(e.getMessage());
     }
-
+    */
     System.exit(1);
   }
 
@@ -44,14 +44,13 @@ class Main {
     ArrayList<String> results = new ArrayList<>();
     for (Pair instance : instances) {
       long startTime = System.nanoTime();
-      Exhaustive e = new Exhaustive(instance.getList(), instance.getTarget());
+      Greedy e = new Greedy(instance.getList(), instance.getTarget());
       ExecutorService service = Executors.newSingleThreadExecutor();
       try {
-        Future<Boolean> f = service.submit(e::subsetSumExhaustive);
+        Future<Boolean> f = service.submit(e::subsetSumGreedy);
         boolean result = f.get(timeout, TimeUnit.MINUTES);
         long endTime = System.nanoTime();
-        //results.add(Boolean.toString(result));
-        results.add(instance.getList().size() + "-" + (endTime - startTime)/1000000);
+        results.add(result + "-" + instance.getList().size() + "-" + (endTime - startTime)/1000000);
       } catch (TimeoutException ex) {
         results.add(instance.getList().size() + "-" + "FAIL");
       } catch (Exception ex) {
