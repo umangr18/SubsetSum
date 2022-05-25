@@ -28,6 +28,7 @@ public class Exhaustive implements Callable<Boolean> {
       boolean b = helper(list, index + 1, target);
       return a | b;
     }
+
     public boolean subsetSumExhaustive() {
       if (this.list.size() == 0) {
         return false;
