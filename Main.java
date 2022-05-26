@@ -16,11 +16,8 @@ class Main {
     ArrayList<Pair> onlineResources = Parse.parse("instances/OnlineResources.txt");
     ArrayList<Pair> curatedHard = Parse.parse("instances/CuratedHard.txt");
 
-    System.out.println(runInstances(baseCases, 1));
-    /*
     try {
-      PrintWriter writer = new PrintWriter("ExhaustiveResults.txt", StandardCharsets.UTF_8);
-      writer.println("ONE MINUTE RESULTS");
+      PrintWriter writer = new PrintWriter("GreedyResults.txt", StandardCharsets.UTF_8);
       writer.println(runInstances(baseCases, 1) + "\n");
       writer.println(runInstances(randomlyGenerated, 1) + "\n");
       writer.println(runInstances(onlineResources, 1) + "\n");
@@ -36,7 +33,7 @@ class Main {
     } catch (IOException e) {
       System.out.println(e.getMessage());
     }
-    */
+
     System.exit(1);
   }
 
