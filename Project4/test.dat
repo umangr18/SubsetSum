@@ -1,0 +1,4 @@
+param n := 6;
+param weight := 1 2 4 8 16 32;
+param target := 22;
+
