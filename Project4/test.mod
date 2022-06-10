@@ -6,5 +6,5 @@ maximize Weight:
         sum{i in 1..n} weight[i]*x[i];
 subject to Constraint1:
         sum{i in 1..n} weight[i]*x[i] <= target;
-Constraint2:
+subject to Constraint2:
         -1 * sum{i in 1..n} weight[i]*x[i] <= -1 * target;
