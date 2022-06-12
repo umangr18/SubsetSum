@@ -1,10 +1,5 @@
 reset;
-model /Users/Student/marandia/combOpt/instance.mod;
-data /Users/Student/marandia/combOpt/instance1.dat;
+model /Users/Student/urastogi/EECE5360/test/test.mod;
+data /Users/Student/urastogi/EECE5360/test/test.dat;
 solve;
-display x1;
-display x2;
-display x3;
-display x4;
-display x5;
-display x6;
+display;
