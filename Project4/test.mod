@@ -1,10 +1,12 @@
-param n;
-param weight{i in 1..n};
+set E;
+param weight{i in E};
 param target;
-var x{1..n} binary;
+
+var x{i in E} binary;
+
 maximize Weight:
-        sum{i in 1..n} weight[i]*x[i];
+        sum{i in E} weight[i]*x[i];
 subject to Constraint1:
-        sum{i in 1..n} weight[i]*x[i] <= target;
+        sum{i in E} weight[i]*x[i] <= target;
 subject to Constraint2:
-        -1 * sum{i in 1..n} weight[i]*x[i] <= -1 * target;
+        -1 * sum{i in E} weight[i]*x[i] <= -1 * target;
