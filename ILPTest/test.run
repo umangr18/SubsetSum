@@ -1,5 +1,0 @@
-reset;
-model /Users/Student/urastogi/EECE5360/test/test.mod;
-data /Users/Student/urastogi/EECE5360/test/test.dat;
-solve;
-display x;
