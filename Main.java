@@ -16,6 +16,12 @@ class Main {
     ArrayList<Pair> onlineResources = Parse.parse("instances/OnlineResources.txt");
     ArrayList<Pair> curatedHard = Parse.parse("instances/CuratedHard.txt");
 
+    //createDatFiles("BaseCases", baseCases);
+    //createDatFiles("RandomlyGenerated", randomlyGenerated);
+    //createDatFiles("OnlineResources", onlineResources);
+    //createDatFiles("CuratedHard", curatedHard);
+
+    /*
     try {
       PrintWriter writer = new PrintWriter("GreedyResults.txt", StandardCharsets.UTF_8);
       writer.println(runInstances(baseCases, 1) + "\n");
@@ -33,8 +39,23 @@ class Main {
     } catch (IOException e) {
       System.out.println(e.getMessage());
     }
+    */
 
     System.exit(1);
+  }
+
+  private static void createDatFiles(String category, ArrayList<Pair> instances) {
+    for (int i = 1; i <= instances.size(); i++) {
+      ILPDataParser parser = new ILPDataParser(instances.get(i - 1));
+      String filename = "DatFiles/" + category + "/instance" + i + ".dat";
+      try {
+        PrintWriter writer = new PrintWriter(filename, StandardCharsets.UTF_8);
+        writer.println(parser.convert());
+        writer.close();
+      } catch (IOException e) {
+        System.out.println(e.getMessage());
+      }
+    }
   }
 
   private static ArrayList<String> runInstances(ArrayList<Pair> instances, int timeout) {
