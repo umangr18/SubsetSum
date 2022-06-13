@@ -1,0 +1,6 @@
+param target := 1;
+set E := 1 2 ;
+param weight := 
+  1  1
+  2  2
+;
