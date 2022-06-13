@@ -1,0 +1,12 @@
+reset;
+option solver cplex;
+option cplex_options "timelimit=60";
+model /Users/Student/urastogi/EECE5360/test/test.mod;
+set CASES = 1 .. 25
+for {j in CASES} {
+reset data;
+data ("/Users/Student/urastogi/EECE5360/test/test" & j & ".dat");
+solve;
+display x;
+display _solve_elapsed_time;
+}
