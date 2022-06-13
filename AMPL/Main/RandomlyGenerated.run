@@ -1,0 +1,12 @@
+reset;
+option solver cplex;
+option cplex_options "timelimit=60";
+model /Users/Student/urastogi/EECE5360/SubsetSum/AMPL/Main/main.mod;
+set INSTANCES = 1..50;
+for {i in INSTANCES} {
+  reset data;
+  data ("/Users/Student/urastogi/EECE5360/SubsetSum/DatFiles/RandomlyGenerated/instance" & i & ".dat");
+  solve;
+  display x > /Users/Student/urastogi/EECE5360/SubsetSum/AMPL/Main/Output/RandomlyGenerated.out;
+  display _solve_elapsed_time > /Users/Student/urastogi/EECE5360/SubsetSum/AMPL/Main/Output/CuratedHard.out;
+}

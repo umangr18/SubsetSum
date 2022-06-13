@@ -1,0 +1,12 @@
+reset;
+option solver cplex;
+option cplex_options "timelimit=60";
+model /Users/Student/urastogi/EECE5360/SubsetSum/AMPL/Main/main.mod;
+set INSTANCES = 1..10;
+for {i in INSTANCES} {
+  reset data;
+  data ("/Users/Student/urastogi/EECE5360/SubsetSum/DatFiles/OnlineResources/instance" & i & ".dat");
+  solve;
+  display x > /Users/Student/urastogi/EECE5360/SubsetSum/AMPL/Main/Output/OnlineResources.out;
+  display _solve_elapsed_time > /Users/Student/urastogi/EECE5360/SubsetSum/AMPL/Main/Output/OnlineResources.out;
+}
