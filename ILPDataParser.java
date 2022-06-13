@@ -34,13 +34,13 @@ public class ILPDataParser {
   private String weight() {
     StringBuilder s = new StringBuilder();
     for (int i = 1; i <= this.list.size(); i++) {
-      s.append("  ").append(i).append("  ").append(this.list.get(i)).append("\n");
+      s.append("  ").append(i).append("  ").append(this.list.get(i - 1)).append("\n");
     }
     return s.toString();
   }
 
   public String convert() {
-    return "param target := " + this.target + ";\nset E := " + this.set() + ";\nparam weight := " + this.weight() + ";";
+    return "param target := " + this.target + ";\nset E := " + this.set() + ";\nparam weight := \n" + this.weight() + ";";
   }
 
 }
