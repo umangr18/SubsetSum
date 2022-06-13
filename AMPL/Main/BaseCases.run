@@ -7,8 +7,8 @@ for {i in INSTANCES} {
   reset data;
   data ("/Users/Student/urastogi/EECE5360/SubsetSum/DatFiles/BaseCases/instance" & i & ".dat");
   solve;
+  print i > /Users/Student/urastogi/EECE5360/SubsetSum/AMPL/Main/Output/BaseCases.out;
   display x > /Users/Student/urastogi/EECE5360/SubsetSum/AMPL/Main/Output/BaseCases.out;
-  printf: "\n" > /Users/Student/urastogi/EECE5360/SubsetSum/AMPL/Main/Output/BaseCases.out;
   display _solve_elapsed_time > /Users/Student/urastogi/EECE5360/SubsetSum/AMPL/Main/Output/BaseCases.out;
-  printf: "\n\n" > /Users/Student/urastogi/EECE5360/SubsetSum/AMPL/Main/Output/BaseCases.out;
+  printf: "\n" > /Users/Student/urastogi/EECE5360/SubsetSum/AMPL/Main/Output/BaseCases.out;
 }
