@@ -8,5 +8,7 @@ for {i in INSTANCES} {
   data ("/Users/Student/urastogi/EECE5360/SubsetSum/DatFiles/OnlineResources/instance" & i & ".dat");
   solve;
   display x > /Users/Student/urastogi/EECE5360/SubsetSum/AMPL/Main/Output/OnlineResources.out;
+  echo "\n" > /Users/Student/urastogi/EECE5360/SubsetSum/AMPL/Main/Output/OnlineResources.out;
   display _solve_elapsed_time > /Users/Student/urastogi/EECE5360/SubsetSum/AMPL/Main/Output/OnlineResources.out;
+  echo "\n\n" > /Users/Student/urastogi/EECE5360/SubsetSum/AMPL/Main/Output/OnlineResources.out;
 }
