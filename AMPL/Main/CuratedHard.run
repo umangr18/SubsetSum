@@ -8,7 +8,7 @@ for {i in INSTANCES} {
   data ("/Users/Student/urastogi/EECE5360/SubsetSum/DatFiles/CuratedHard/instance" & i & ".dat");
   solve;
   display x > /Users/Student/urastogi/EECE5360/SubsetSum/AMPL/Main/Output/CuratedHard.out;
-  echo "\n" > /Users/Student/urastogi/EECE5360/SubsetSum/AMPL/Main/Output/CuratedHard.out;
+  printf: "\n" > /Users/Student/urastogi/EECE5360/SubsetSum/AMPL/Main/Output/CuratedHard.out;
   display _solve_elapsed_time > /Users/Student/urastogi/EECE5360/SubsetSum/AMPL/Main/Output/CuratedHard.out;
-  echo "\n\n" > /Users/Student/urastogi/EECE5360/SubsetSum/AMPL/Main/Output/CuratedHard.out;
+  printf: "\n\n" > /Users/Student/urastogi/EECE5360/SubsetSum/AMPL/Main/Output/CuratedHard.out;
 }
