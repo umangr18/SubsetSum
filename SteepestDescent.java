@@ -58,7 +58,8 @@ public class SteepestDescent implements Callable<Boolean> {
       ArrayList<Integer> best = new ArrayList<>();
       int bestValue = 0;
       for (ArrayList<Integer> neighbor : neighbors) {
-        if (getValue(neighbor) > bestValue) {
+        if (this.getValue(neighbor) > bestValue) {
+          bestValue = this.getValue(neighbor);
           best = neighbor;
         }
       }
