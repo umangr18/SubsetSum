@@ -92,6 +92,9 @@ public class TabuSearch implements Callable<Boolean> {
     private ArrayList<Integer> helper(ArrayList<Integer> current) {
       if (this.tabuList.size() < this.kTabu) {
         this.tabuList.add(current);
+      } else if (this.tabuList.size() == this.kTabu) {
+        this.tabuList.remove(0);
+        this.tabuList.add(current);
       }
       if (this.getValue(current) == this.target /* TODO: OR IF TIME LIMIT EXCEEDED */) {
         return current;
