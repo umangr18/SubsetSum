@@ -1,17 +1,21 @@
 import java.util.ArrayList;
 import java.util.concurrent.Callable;
 
-public class SteepestDescent implements Callable<Boolean> {
+public class TabuSearch implements Callable<Boolean> {
     private final ArrayList<Integer> list;
     private final int target;
     private final ArrayList<Integer> initialSolution;
     private final int k;
+    private final int kTabu;
+    private final ArrayList<ArrayList<Integer>> tabuList;
 
-    SteepestDescent(ArrayList<Integer> list, int target, ArrayList<Integer> initialSolution, int k) {
+    TabuSearch(ArrayList<Integer> list, int target, ArrayList<Integer> initialSolution, int k, int kTabu) {
       this.list = list;
       this.target = target;
       this.initialSolution = initialSolution;
       this.k = k;
+      this.kTabu = kTabu;
+      this.tabuList = new ArrayList<>();
     }
 
     private ArrayList<ArrayList<Integer>> getPotentialNeighbors(ArrayList<Integer> solution) {
@@ -58,7 +62,7 @@ public class SteepestDescent implements Callable<Boolean> {
       ArrayList<Integer> best = new ArrayList<>();
       int bestValue = 0;
       for (ArrayList<Integer> neighbor : neighbors) {
-        if (getValue(neighbor) > bestValue) {
+        if (getValue(neighbor) > bestValue && !this.tabuList.contains(neighbor)) {
           best = neighbor;
         }
       }
@@ -78,14 +82,17 @@ public class SteepestDescent implements Callable<Boolean> {
 
     @Override
     public Boolean call() {
-      return subsetSumSteepestDescent();
+      return subsetSumTabuSearch();
     }
 
-    public boolean subsetSumSteepestDescent() {
+    public boolean subsetSumTabuSearch() {
       return this.getValue(this.helper(this.initialSolution)) == this.target;
     }
 
     private ArrayList<Integer> helper(ArrayList<Integer> current) {
+      if (this.tabuList.size() < this.kTabu) {
+        this.tabuList.add(current);
+      }
       if (this.getValue(current) == this.target /* TODO: OR IF TIME LIMIT EXCEEDED */) {
         return current;
       } else {
